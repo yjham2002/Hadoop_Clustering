@@ -7,11 +7,15 @@
 * 본 프로젝트는 Mac OSX와 유닉스 기반의 운영체제를 대상으로 합니다.
 
 ### Background
+- 본 내용은 *Chuck Lam 저 Hadoop in Action (지앤선)* 을 참고하여 작성하였습니다.
+*개요* - 하둡은 방대한 양의 데이터를 다루기 위해 개발된 프레임워크로 구글의 MapReduce 방식을 기반으로 합니다.
 
-
+*용어 및 해설* 
+  - MapReduce : MapReduce는 네임밸류페어(키, 값) 형태의 데이터를 기반으로 Mapper 및 Reducer를 통해 일련의 연산 과정으로 결과를 도출해내는 방식을 의미합니다.
+  - 
 
 ### Development
-- 본 내용은 [링크](https://dtflaneur.wordpress.com/2015/10/02/installing-hadoop-on-mac-osx-el-capitan/)를 번역 및 재가공한 내용입니다.
+- 본 환경설정에 대한 내용은 [링크](https://dtflaneur.wordpress.com/2015/10/02/installing-hadoop-on-mac-osx-el-capitan/)를 번역 및 재가공한 내용입니다.
 
 #### 0. Mac OSX 사용자는 패키지 관리자 brew를 설치합니다.
 ```sh
