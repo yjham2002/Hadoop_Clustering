@@ -11,14 +11,14 @@
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-1. 시스템 패키지 관리자를 통해 hadoop을 설치합니다.
+- 1. 시스템 패키지 관리자를 통해 hadoop을 설치합니다.
 ```sh
 brew search hadoop
 brew install hadoop
 ```
 -  /usr/local/Cellar/hadoop 에 하둡이 설치됩니다.
 
-2. /usr/local/Cellar/hadoop/(Your Version)/libexec/etc/hadoop/hadoop-env.sh 을 다음과 같이 수정합니다.
+- 2. /usr/local/Cellar/hadoop/(Your Version)/libexec/etc/hadoop/hadoop-env.sh 을 다음과 같이 수정합니다.
 - 다음과 같은 부분을 수정합니다.
 ```sh
 export HADOOP_OPTS="$HADOOP_OPTS -Djava.net.preferIPv4Stack=true"
@@ -28,7 +28,7 @@ export HADOOP_OPTS="$HADOOP_OPTS -Djava.net.preferIPv4Stack=true"
 export HADOOP_OPTS="$HADOOP_OPTS -Djava.net.preferIPv4Stack=true -Djava.security.krb5.realm= -Djava.security.krb5.kdc="
 ```
 
-3. /usr/local/Cellar/hadoop/(Your Version)/libexec/etc/hadoop/core-site.xml 에 다음과 같은 내용을 추가합니다.
+- 3. /usr/local/Cellar/hadoop/(Your Version)/libexec/etc/hadoop/core-site.xml 에 다음과 같은 내용을 추가합니다.
 - <configuration> 아래에 다음 내용을 추가합니다.
 ```xml
 <property>
@@ -42,7 +42,7 @@ export HADOOP_OPTS="$HADOOP_OPTS -Djava.net.preferIPv4Stack=true -Djava.security
 </property>
 ```
 
-4.  /usr/local/Cellar/hadoop/(Your Version)/libexec/etc/hadoop/mapred-site.xml 에 다음과 같은 내용을 추가합니다.
+- 4.  /usr/local/Cellar/hadoop/(Your Version)/libexec/etc/hadoop/mapred-site.xml 에 다음과 같은 내용을 추가합니다.
 - <configuration> 아래에 다음 내용을 추가합니다.
 ```xml
 <property>
@@ -51,26 +51,26 @@ export HADOOP_OPTS="$HADOOP_OPTS -Djava.net.preferIPv4Stack=true -Djava.security
 </property>
 ```
 
-5. 하둡 시스템의 시작과 종료를 보다 수월하게 진행하기 위해 다음과 같은 얼라이어스를 등록합니다.
+- 5. 하둡 시스템의 시작과 종료를 보다 수월하게 진행하기 위해 다음과 같은 얼라이어스를 등록합니다.
 - 주의 : 본 단계에서 하둡을 실행 시 연결에 실패할 수 있습니다.
 ```sh
 $ alias hstart="/usr/local/Cellar/hadoop/2.6.0/sbin/start-dfs.sh;/usr/local/Cellar/hadoop/2.6.0/sbin/start-yarn.sh"
 $ alias hstop="/usr/local/Cellar/hadoop/2.6.0/sbin/stop-yarn.sh;/usr/local/Cellar/hadoop/2.6.0/sbin/stop-dfs.sh"
 ```
 
-6. 하둡 실행을 위해 다음과 같은 스크립트를 통해 환경을 포맷합니다.
+- 6. 하둡 실행을 위해 다음과 같은 스크립트를 통해 환경을 포맷합니다.
 ```sh
 $ hdfs namenode -format
 ```
 
-7. 홈 경로(~)로 이동하여 SSH를 통해 관리 인터페이스 접속을 위한 RSA 키를 생성합니다.
+- 7. 홈 경로(~)로 이동하여 SSH를 통해 관리 인터페이스 접속을 위한 RSA 키를 생성합니다.
 ```sh
 $ ssh-keygen -t rsa
 ```
 - 키의 이름은 id_rsa 로 지정하며, 암호는 임의의 내용으로 지정합니다.
 - 로컬호스트로의 접속을 위해 유닉스 환경 내의 원격 로그인 설정을 허용해야 합니다. (Mac OSX의 경우, 시스템 환경설정-공유-원격 로그인)
 
-8. 앞서 등록한 얼라이어스인 hstart를 통해 하둡을 실행합니다.
+- 8. 앞서 등록한 얼라이어스인 hstart를 통해 하둡을 실행합니다.
 - 하둡 환경 시작
 ```sh
 $ hstart
@@ -81,7 +81,7 @@ $ hstop
 ```
 - 본 단계에서는 여러 차례 RSA 키 혹은 리눅스 사용자 계정의 암호를 요구할 수 있습니다.
 
-9. 하둡은 다음과 같은 포트를 통해 관리 인터페이스를 제공하며, 다음과 같은 커맨드를 사용할 수 있습니다.
+- 9. 하둡은 다음과 같은 포트를 통해 관리 인터페이스를 제공하며, 다음과 같은 커맨드를 사용할 수 있습니다.
 ```sh
 Resource Manager: http://localhost:50070
 JobTracker: http://localhost:8088/
@@ -100,7 +100,7 @@ $ yarn // For resource management more information than the web interface.
 $ mapred // Detailed information about jobs
 ```
 
-10. 간단한 Java기반의 단어 색인 프로그램을 통해 하둡을 경험하세요.
+- 10. 간단한 Java기반의 단어 색인 프로그램을 통해 하둡을 경험하세요.
 ```java
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
@@ -214,7 +214,7 @@ public static void main(String[] args) throws Exception {
 }
 ```
 
-11. 다음과 같이 컴파일한 뒤, 해당 스크립트를 실행하여 하둡을 작동시키십시오.
+- 11. 다음과 같이 컴파일한 뒤, 해당 스크립트를 실행하여 하둡을 작동시키십시오.
 - 작성한 프로그램의 컴파일
 ```sh
 $ javac WordCount.java -cp $(hadoop classpath)
@@ -225,7 +225,7 @@ $ javac WordCount.java -cp $(hadoop classpath)
 $ hadoop jar ./target/bdp-1.3.jar dataSet3.txt  dataOutput1
 ```
 
-12. 프로그램의 입력 파일은 다음과 같이 업로드합니다.
+- 12. 프로그램의 입력 파일은 다음과 같이 업로드합니다.
 ```sh
 $ hdfs dfs -put book.txt /data
 $ hdfs dfs -ls /
