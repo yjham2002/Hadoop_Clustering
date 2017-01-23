@@ -12,10 +12,13 @@ import org.apache.hadoop.util.GenericOptionsParser;
  */
 public class AppMain {
     public static void main(String[] args){
+        args = new String[]{"input.txt", "output.txt"};
+
         Configuration conf = new Configuration();
         String[] otherArgs = null;
         try {
             otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
+
             if (otherArgs.length != 2) {
                 System.err.println("Usage: wordcount <in> <out>");
                 System.exit(2);
