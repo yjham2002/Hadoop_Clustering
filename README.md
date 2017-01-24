@@ -324,15 +324,16 @@ export HADOOP_OPTS="-Djava.library.path=$YARN_HOME/lib/native"
 
 #### 3. Fully Distributed 모드의 설정
 
-- Hadoop의 모든 설정파일은 $HADOOP_PREFIX/etc/hadoop 내에 존재합니다.
+- Hadoop의 모든 설정파일은 $HADOOP_PREFIX/etc/hadoop 내에 존재하며 내용은 다음과 같습니다.
 
 |파일명|형식|해설|
 |:-:|:-:|:-:|
-|hadoop-env.sh|bash 스크립트|하둡의 구동을 위한 스크립트에서 사용되는 환경변수|
-|   |   |   |
-|   |   |   |
-|   |   |   |
-|   |   |   |
-|   |   |   |
-|   |   |   |
-|   |   |   |
+|hadoop-env.sh|bash 스크립트|Hadoop의 구동을 위한 스크립트에서 사용되는 환경변수|
+|core-site.xml|Hadoop Setting XML|HDFS 및 MapReduce에 공통적으로 사용되는 I/O설정과 같은 Hadoop 코어를 위한 환경 설정 구성|
+|hdfs-site.xml|Hadoop Setting XML|NameNode, SecondaryNameNode, DataNode 등과 같은 HDFS 데몬을 위한 환경 설정 구성|
+|mapred-site.xml|Hadoop Setting XML|JobTracker, TaskTracker와 같은 MapReduce 데몬을 위한 환경 설정 구성|
+|masters|Text|SecondaryNameNode를 구동시킬 컴퓨터의 목록(라인당 하나의 컴퓨터)|
+|slaves|Text|DataNode와 TaskTracker를 구동시킬 컴퓨터의 목록(라인당 하나의 컴퓨터)|
+|hadoop-metric.properties|Java Property|매트릭스가 하둡에서 어떻게 표시되는지를 제어하는 속성|
+|log4i.properties|Java Property|시스템 로그 파일을 위한 속성, NameNode의 감시 로그, TaskTracker의 자식 프로세스의 수행 로그|
+
