@@ -300,6 +300,8 @@ export HADOOP_OPTS="-Djava.library.path=$YARN_HOME/lib/native"
 
 - 만약 위 Pseudo-Distributed 모드 설정 과정에서 키 생성을 하지 않았다면 생성한다.
 
+- 주의 : Mac OSX의 경우, authorized_keys 대신 known_hosts가 이용되는 경우가 있습니다.
+
 ```sh
 ~$ ssh-keygen -t rsa -P ""
 ~$ cd ~/.ssh
@@ -322,18 +324,51 @@ export HADOOP_OPTS="-Djava.library.path=$YARN_HOME/lib/native"
 
 - 주의 : ~/.ssh의 권한은 700이고, authorized_keys의 권한은 600이어야 합니다.
 
-#### 3. Fully Distributed 모드의 설정
+#### 3. 디렉토리 생성
+
+- 다음과 같은 스크립트를 통해 필요한 디렉토리를 생성합니다.
+
+- 아래의 디렉토리명은 사용자가 이후 과정에서 등록할 때 동일하게 작성해야 하므로 주의해야 하며, 임의의 이름이 가능합니다.
+
+```sh
+~$ mkdir –p ${HADOOP_PREFIX}/hadoop/hdfs/namenode
+~$ mkdir –p ${HADOOP_PREFIX}/hadoop/hdfs/datanode
+~$ mkdir –p ${HADOOP_PREFIX}/hadoop/mapred/system
+~$ mkdir –p ${HADOOP_PREFIX}/hadoop/mapred/local
+```
+
+#### 4. Fully Distributed 모드의 설정
 
 - Hadoop의 모든 설정파일은 $HADOOP_PREFIX/etc/hadoop 내에 존재하며 내용은 다음과 같습니다.
 
+Hadoop의 설정 구성요소
+
 |파일명|형식|해설|
 |:-:|:-:|:-:|
-|hadoop-env.sh|bash 스크립트|Hadoop의 구동을 위한 스크립트에서 사용되는 환경변수|
+|hadoop-env.sh|Bash 스크립트|Hadoop의 구동을 위한 스크립트에서 사용되는 환경변수|
 |core-site.xml|Hadoop Setting XML|HDFS 및 MapReduce에 공통적으로 사용되는 I/O설정과 같은 Hadoop 코어를 위한 환경 설정 구성|
 |hdfs-site.xml|Hadoop Setting XML|NameNode, SecondaryNameNode, DataNode 등과 같은 HDFS 데몬을 위한 환경 설정 구성|
 |mapred-site.xml|Hadoop Setting XML|JobTracker, TaskTracker와 같은 MapReduce 데몬을 위한 환경 설정 구성|
 |masters|Text|SecondaryNameNode를 구동시킬 컴퓨터의 목록(라인당 하나의 컴퓨터)|
 |slaves|Text|DataNode와 TaskTracker를 구동시킬 컴퓨터의 목록(라인당 하나의 컴퓨터)|
-|hadoop-metric.properties|Java Property|매트릭스가 하둡에서 어떻게 표시되는지를 제어하는 속성|
+|hadoop-metric.properties|Java Property|매트릭스가 Hadoop에서 어떻게 표시되는지를 제어하는 속성|
 |log4i.properties|Java Property|시스템 로그 파일을 위한 속성, NameNode의 감시 로그, TaskTracker의 자식 프로세스의 수행 로그|
+
+ #### 5. 데몬의 실행과 시작
+
+ - 최초 실행 시 nameNode를 포맷합니다.
+
+ ```sh
+ ~$ hdfs namenode -format
+ ```
+
+ 데몬에 따른 시작 및 종료 스크립트 파일
+
+|-|시작|종료|
+|:-:|:-:|:-:|
+|All|start-all.sh|stop-all.sh|
+|HDFS Only|start-dfs.sh|stop-dfs.sh|
+|YARN Only|start-yarn.sh|stop-yarn.sh|
+
+- 위의 Pseudo-Distributed Mode 설정 시 구성한 얼라이어스인 *hstart*나 *hstop*을 이용하거나, 유사하게 얼라이어스할 수 있습니다.
 
