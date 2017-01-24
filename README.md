@@ -354,13 +354,13 @@ export HADOOP_OPTS="-Djava.library.path=$YARN_HOME/lib/native"
 |hadoop-metric.properties|Java Property|매트릭스가 Hadoop에서 어떻게 표시되는지를 제어하는 속성|
 |log4i.properties|Java Property|시스템 로그 파일을 위한 속성, NameNode의 감시 로그, TaskTracker의 자식 프로세스의 수행 로그|
 
- #### 5. 데몬의 실행과 시작
+#### 5. 데몬의 실행과 시작
 
- - 최초 실행 시 nameNode를 포맷합니다.
+- 최초 실행 시 nameNode를 포맷합니다.
 
- ```sh
- ~$ hdfs namenode -format
- ```
+```sh
+~$ hdfs namenode -format
+```
 
 - 데몬에 따른 시작 및 종료 스크립트 파일
 
