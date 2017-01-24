@@ -341,7 +341,7 @@ export HADOOP_OPTS="-Djava.library.path=$YARN_HOME/lib/native"
 
 - Hadoop의 모든 설정파일은 $HADOOP_PREFIX/etc/hadoop 내에 존재하며 내용은 다음과 같습니다.
 
-Hadoop의 설정 구성요소
+- Hadoop의 설정 구성요소
 
 |파일명|형식|해설|
 |:-:|:-:|:-:|
@@ -362,7 +362,7 @@ Hadoop의 설정 구성요소
  ~$ hdfs namenode -format
  ```
 
- 데몬에 따른 시작 및 종료 스크립트 파일
+- 데몬에 따른 시작 및 종료 스크립트 파일
 
 |-|시작|종료|
 |:-:|:-:|:-:|
