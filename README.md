@@ -265,7 +265,7 @@ $ hdfs dfs -ls /
 
 ### Development(Fully Distributed Mode - 라이브 하둡 서비스 운용)
 
-- 본 내용은 [링크](http://atoz91.tistory.com/50)를 참조하였으며, 위 내용 이후의 작업을 대상으로 합니다.
+- 본 내용은 [링크](http://atoz91.tistory.com/50)를 참조하였으며, 위 Pseudo-Distributed 모드 설치 내용 이후의 작업을 대상으로 합니다.
 
 #### 1. 환경변수를 설정합니다.
 
@@ -353,6 +353,10 @@ export HADOOP_OPTS="-Djava.library.path=$YARN_HOME/lib/native"
 |slaves|Text|DataNode와 TaskTracker를 구동시킬 컴퓨터의 목록(라인당 하나의 컴퓨터)|
 |hadoop-metric.properties|Java Property|매트릭스가 Hadoop에서 어떻게 표시되는지를 제어하는 속성|
 |log4i.properties|Java Property|시스템 로그 파일을 위한 속성, NameNode의 감시 로그, TaskTracker의 자식 프로세스의 수행 로그|
+
+- 설정 구성요소별 세부 사항
+
+세부설정 사항은 추후 업데이트됩니다.
 
 #### 5. 데몬의 실행과 시작
 
