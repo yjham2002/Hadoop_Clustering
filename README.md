@@ -265,3 +265,74 @@ $ hdfs dfs -ls /
 
 ### Development(Fully Distributed Mode - 라이브 하둡 서비스 운용)
 
+- 본 내용은 [링크](http://atoz91.tistory.com/50)를 참조하였으며, 위 내용 이후의 작업을 대상으로 합니다.
+
+#### 1. 환경변수를 설정합니다.
+
+- Mac OSX의 경우, Java 환경변수 및 Hadoop의 설치경로가 다를 수 있으니 주의하십시오.
+
+```sh
+#Java Setting
+export JAVA_HOME=$HOME/jdk
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASSPATH=$JAVA_HOME/lib:$CLASSPATH
+
+# Hadoop Path
+export HADOOP_PREFIX=$HOME/hadoop
+export PATH=$PATH:$HADOOP_PREFIX/bin
+export PATH=$PATH:$HADOOP_PREFIX/sbin
+export HADOOP_HOME=$HOME/hadoop
+export HADOOP_MAPRED_HOME=${HADOOP_PREFIX}
+export HADOOP_COMMON_HOME=${HADOOP_PREFIX}
+export HADOOP_HDFS_HOME=${HADOOP_PREFIX}
+export YARN_HOME=${HADOOP_PREFIX}
+export HADOOP_YARN_HOME=${HADOOP_PREFIX}
+export HADOOP_CONF_DIR=${HADOOP_PREFIX}/etc/hadoop
+
+# Native Path
+export HADOOP_COMMON_LIB_NATIVE_DIR=${YARN_HOME}/lib/native
+export HADOOP_OPTS="-Djava.library.path=$YARN_HOME/lib/native"
+```
+
+#### 2. Key Distribution
+
+- 마스터 노드(마스터 PC)에서 위 Pseudo-Distributed 모드 설정 시 생성했던 키를 authrized_keys로 복제한다.(키 경로 : ~/.ssh)
+
+- 만약 위 Pseudo-Distributed 모드 설정 과정에서 키 생성을 하지 않았다면 생성한다.
+
+```sh
+~$ ssh-keygen -t rsa -P ""
+~$ cd ~/.ssh
+~/.ssh$ cat id_rsa.pub >> authorized_keys
+```
+
+- 위 키 생성 및 복제 과정을 모든 노드에서 동일하게 수행하고, 이를 마스터 노드의 authorized_keys로 전송합니다.
+
+```sh
+~$ ssh hadoop@slave01 'cat ~/.ssh/id_rsa.pub' >> ~/.ssh/authorized_keys
+~$ ssh hadoop@slave02 'cat ~/.ssh/id_rsa.pub' >> ~/.ssh/authorized_keys
+```
+
+- 마스터 노드의 authorized_keys로 모든 키의 복제가 완료되면, 마스터 노드의 공개키를 모든 타 노드들에게 배포합니다.
+
+```sh
+~$ scp authorized_keys hadoop@slave01:~/.ssh/authorized_keys
+~$ scp authorized_keys hadoop@slave02:~/.ssh/authorized_keys
+```
+
+- 주의 : ~/.ssh의 권한은 700이고, authorized_keys의 권한은 600이어야 합니다.
+
+#### 3. Fully Distributed 모드의 설정
+
+- Hadoop의 모든 설정파일은 $HADOOP_PREFIX/etc/hadoop 내에 존재합니다.
+
+|파일명|형식|해설|
+|:-:|:-:|:-:|
+|hadoop-env.sh|bash 스크립트|하둡의 구동을 위한 스크립트에서 사용되는 환경변수|
+|   |   |   |
+|   |   |   |
+|   |   |   |
+|   |   |   |
+|   |   |   |
+|   |   |   |
+|   |   |   |
