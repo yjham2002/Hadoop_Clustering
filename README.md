@@ -33,7 +33,7 @@
 - Pseudo-Distributed 모드 : 실행중인 워크스테이션을 하나의 클러스터로 취급하여 실행된다.
 - Fully Distributed 모드 : 모든 하둡의 장점을 이용할 수 있는 모드로 실운용 시 이용된다.
 
-### Development
+### Development(Pseudo-Distributed Mode : MapReduce 개발 및 테스트용 - 하나의 PC에서만 작동)
 - 본 환경설정에 대한 내용은 [링크](https://dtflaneur.wordpress.com/2015/10/02/installing-hadoop-on-mac-osx-el-capitan/)를 번역 및 재가공한 내용입니다.
 
 #### 0. Mac OSX 사용자는 패키지 관리자 brew를 설치합니다.
@@ -260,3 +260,8 @@ $ hadoop jar ./target/bdp-1.3.jar dataSet3.txt  dataOutput1
 $ hdfs dfs -put book.txt /data
 $ hdfs dfs -ls /
 ```
+
+## 적용
+
+### Development(Fully Distributed Mode - 라이브 하둡 서비스 운용)
+
