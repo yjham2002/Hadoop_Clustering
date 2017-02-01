@@ -35,30 +35,7 @@
 
 - *중요* (Hadoop 실행 시 필수적으로 개방되어야하는 포트 목록)
 ```sh
-8020
-14000
-50070
-50470
-8485
-50010
-50075
-50030
-50090
-50020
-8032
-8030
-8031
-8033
-8025
-8088
-8041
-8040
-8042
-9000
-9001
-10020
-13562
-19888
+8020/14000/50070/50470/8485/50010/50075/50030/50090/50020/8032/8030/8031/8033/8025/8088/8041/8040/8042/9000/9001/10020/13562/19888
 ```
 
 ### Development(Pseudo-Distributed Mode : MapReduce 개발 및 테스트용 - 하나의 PC에서만 작동)
@@ -403,6 +380,77 @@ export HADOOP_OPTS="-Djava.library.path=$YARN_HOME/lib/native"
 |YARN Only|start-yarn.sh|stop-yarn.sh|
 
 - 위의 Pseudo-Distributed Mode 설정 시 구성한 얼라이어스인 *hstart*나 *hstop*을 이용하거나, 유사하게 얼라이어스할 수 있습니다.
+
+## CentOS 및 Redhat 계열 환경 구성
+
+#### Prerequisite (본 환경에서는 root를 이용하여 진행하기에 적절한 내용 수정이 필수적임)
+
+- Java 설치 및 환경 변수 등록 ($JAVA_HOME)
+- yum 을 통한 wget, ssh 설치
+- Hadoop 을 이용할 계정 생성
+ 
+```sh
+# adduser hadoop
+# passwd hadoop
+```
+
+#### 키 생성 및 인증
+
+```sh
+# su - hadoop
+$ ssh-keygen -t rsa
+$ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+$ chmod 0600 ~/.ssh/authorized_keys
+
+$ ssh localhost
+$ exit
+```
+
+#### Downloading Hadoop
+
+```sh
+$ cd ~
+$ wget http://apache.claz.org/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz
+$ tar xzf hadoop-2.7.1.tar.gz
+$ mv hadoop-2.7.1 hadoop
+```
+
+#### Setting Environmental Variables
+
+```sh
+export HADOOP_HOME=/YOUR-HADOOP-USER-NAME/hadoop
+export HADOOP_INSTALL=$HADOOP_HOME
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0
+export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib"
+
+alias hd_start="$HADOOP_HOME/sbin/start-all.sh"
+alias hd_stop="$HADOOP_HOME/sbin/stop-all.sh"
+```
+
+- 적용
+
+```sh
+$ source ~/.bashrc
+```
+
+#### Formatting and Starting
+
+```sh
+$ hdfs namenode -format
+$ hd_start (Aliased as above)
+```
+
+- namenode의 포맷이 정상적으로 이루어지지 않고, 호스트 네임과 관련된 오류 발생 시 hostname을 localhost로 수정해야 함.
+
+```sh
+$ hostname localhost
+```
 
 ## 이용 사례연구
 
