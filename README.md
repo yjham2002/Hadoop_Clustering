@@ -33,6 +33,34 @@
 - Pseudo-Distributed 모드 : 실행중인 워크스테이션을 하나의 클러스터로 취급하여 실행된다.
 - Fully Distributed 모드 : 모든 하둡의 장점을 이용할 수 있는 모드로 실운용 시 이용된다.
 
+- *중요* (Hadoop 실행 시 필수적으로 개방되어야하는 포트 목록)
+```sh
+8020
+14000
+50070
+50470
+8485
+50010
+50075
+50030
+50090
+50020
+8032
+8030
+8031
+8033
+8025
+8088
+8041
+8040
+8042
+9000
+9001
+10020
+13562
+19888
+```
+
 ### Development(Pseudo-Distributed Mode : MapReduce 개발 및 테스트용 - 하나의 PC에서만 작동)
 - 본 환경설정에 대한 내용은 [링크](https://dtflaneur.wordpress.com/2015/10/02/installing-hadoop-on-mac-osx-el-capitan/)를 번역 및 재가공한 내용입니다.
 
@@ -375,4 +403,6 @@ export HADOOP_OPTS="-Djava.library.path=$YARN_HOME/lib/native"
 |YARN Only|start-yarn.sh|stop-yarn.sh|
 
 - 위의 Pseudo-Distributed Mode 설정 시 구성한 얼라이어스인 *hstart*나 *hstop*을 이용하거나, 유사하게 얼라이어스할 수 있습니다.
+
+## 이용 사례연구
 
