@@ -38,7 +38,10 @@
 8020/14000/50070/50470/8485/50010/50075/50030/50090/50020/8032/8030/8031/8033/8025/8088/8041/8040/8042/9000/9001/10020/13562/19888
 ```
 
-### Development(Pseudo-Distributed Mode : MapReduce 개발 및 테스트용 - 하나의 PC에서만 작동)
+### Development(Pseudo-Distributed Mode : MapReduce 개발 및 테스트용)
+
+*CentOS 및 RedHat 계열에서의 환경 구축은 아래에 포함되어 있으므로, 본 파트는 참조하지 마십시오.*
+
 - 본 환경설정에 대한 내용은 [링크](https://dtflaneur.wordpress.com/2015/10/02/installing-hadoop-on-mac-osx-el-capitan/)를 번역 및 재가공한 내용입니다.
 
 #### 0. Mac OSX 사용자는 패키지 관리자 brew를 설치합니다.
