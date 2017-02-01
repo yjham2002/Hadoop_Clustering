@@ -40,7 +40,7 @@
 
 ### Development(Pseudo-Distributed Mode : MapReduce 개발 및 테스트용)
 
-*CentOS 및 RedHat 계열에서의 환경 구축은 아래에 포함되어 있으므로, 본 파트는 참조하지 마십시오.*
+*CentOS 및 RedHat 계열에서의 환경 구축을 원하시는 분은 본 파트를 참조하지 마십시오.*
 
 - 본 환경설정에 대한 내용은 [링크](https://dtflaneur.wordpress.com/2015/10/02/installing-hadoop-on-mac-osx-el-capitan/)를 번역 및 재가공한 내용입니다.
 
